@@ -4,6 +4,8 @@ A grid component for angularjs > 1.3
 
 include the following scripts
 
+```javascript
+
   <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
 
   <script src="/assets/angularjs/angular.min.js"></script>
@@ -18,3 +20,5 @@ include the following scripts
 
   <!-- application and bz-components file -->
   <script src="/assets/js/modules/proj/script.js"></script>
+
+```

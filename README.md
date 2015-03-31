@@ -4,7 +4,7 @@ A grid component for angularjs > 1.3
 
 include the following scripts
 
-```javascript
+```html
 
   <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
 

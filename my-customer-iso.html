@@ -1,0 +1,47 @@
+<style>
+  #customer-datagrid > .grid-title {
+    padding-bottom: 15px;
+    color: blue;
+  }
+</style>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add / Edit Customer</h3>
+        </div>
+        <div class="modal-body">
+            <form ng-model="form">
+            <input type="hidden" ng-model="form.id" value=0><br>
+            
+            Name: <input type="text" ng-model="form.name"><br>
+            Age: <input type="number" ng-model="form.age"><br>
+            Work: <input type="text" ng-model="form.work"><br>
+            
+            
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok(form)">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+<div id="customer-datagrid">
+  <div class="grid-title">
+    <span style="font-size:14pt;">{{dd.title}}</span>
+   <input type="button" value="Add" ng-click="dd.open()">
+  </div>
+  <table class="table"  style="position: relative;">
+      <tr>
+        <td style="font-weight: bold;" ng-repeat="(key, value) in dd.items[1]">{{key}} </td>
+        <td><span style="padding-left:10px; position: absolute; right:50px; width: 80px;">Actions</span></td>
+      </tr>
+      <tr ng-repeat="item in dd.items" style="border-bottom:grey solid 1px;">
+        <td ng-repeat="field in item">{{field}}</td>
+        <td><span style="padding-left:10px; position: absolute; right:50px; ">  
+        <input type="button" value="Edit" ng-click="dd.open(item, $index)">
+        <input type="button" value="Del" ng-click="dd.deleteItem(item, $index)">
+        </span></td>
+      </tr>
+  
+  </table>
+</div>

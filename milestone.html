@@ -1,0 +1,48 @@
+<style>
+  #customer-datagrid > .grid-title {
+    padding-bottom: 15px;
+    /*color: blue;*/
+  }
+
+  .modal-dialog  {width:80%;}
+
+</style>
+
+    <script type="text/ng-template" id="planModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add / Edit Customer</h3>
+        </div>
+        <div class="modal-body">
+            <form ng-model="form" class="form-horizontal">
+              <text-field label="Name:" model="form.name"></text-field>
+
+              <text-field label="Forecast Cost:" model="form.cost_forecast"></text-field>
+              <date-field label="Due Date:" ng-model="form.due_date" date-options="dateOptions"></date-field>
+            
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok(form)">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+<div id="customer-datagrid" class="ng-cloak">
+  <div class="grid-title">
+    <span style="font-size:14pt;">{{dd.title}}</span>
+   <input type="button" value="Add" ng-click="dd.open()">
+  </div>
+  <table class="table"  style="position: relative;">
+      <tr>
+        <td style="font-weight: bold;" ng-repeat="title in ['id', 'Name', 'Due Date', 'Cost Forecast']">{{title}} </td>
+        <td><span style="padding-left:10px; position: absolute; right:50px; width: 80px;">Actions</span></td>
+      </tr>
+      <tr ng-repeat="item in dd.items" style="border-bottom:grey solid 1px;">
+        <td ng-repeat="val in ['id', 'name', 'due_date', 'cost_forecast']">{{item[val]}}</td>
+        <td><span style="padding-left:10px; position: absolute; right:50px; ">  
+        <input type="button" value="Edit" ng-click="dd.edit(item.id, item, $index)">
+        <input type="button" value="Del" ng-click="dd.deleteItem(item.id, $index)">
+        </span></td>
+      </tr>
+  
+  </table>
+</div>

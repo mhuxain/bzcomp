@@ -1,0 +1,80 @@
+<style>
+  .grid-title {
+    padding-bottom: 10px;
+  }
+
+  #companies-grid > .table-container {
+    border-top: 1px grey solid;
+    padding-top: 10px;
+  }
+</style>
+    <script type="text/ng-template" id="coModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add / Edit Companies</h3>
+        </div>
+        <div class="modal-body">
+            <form ng-model="form">
+            
+            Name: <input type="text" ng-model="form.name"><br>
+            Field: <input type="text" ng-model="form.work"><br>
+              Customer: 
+                    <ui-select ng-model="form.customer"
+                         theme="bootstrap"
+                         ng-disabled="disabled"
+                         reset-search-input="true"
+                         style="width: 300px;">
+                      <ui-select-match placeholder="Enter ..">{{$select.selected.name}}</ui-select-match>
+                      <ui-select-choices repeat="customer.id as customer in dd.formFields.customers | propsFilter: {name: $select.search}"
+                               refresh-delay="0">
+                        <div ng-bind-html="customer.name | highlight: $select.search"></div>
+                      </ui-select-choices>
+                    </ui-select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok(form)">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+<div id="companies-grid">
+  <div class="table-container" ng-show="dd.items.length > 0">
+    <!-- ############### Grid Title ############### -->
+    <div class="grid-title">
+      <span style="font-size:14pt;">{{dd.title}}</span>
+     <input type="button" value="Add" ng-click="dd.open()">
+    </div>
+    <!-- ============================================  -->
+
+
+    <table class="table" style="position: relative;" >
+      <tr>
+        
+    <!-- ############### Table Headers ############### -->
+        
+        <td style="font-weight: bold;" ng-repeat="(key, value) in dd.items[0]">{{key}} </td>
+        <td><span style="padding-left:10px; position: absolute; right:50px; width: 80px;">Actions</span></td>
+        
+    <!-- ============================================  -->
+        
+      </tr>
+      
+    <!-- ############### Table Body ############### -->
+    
+      <tr ng-repeat="item in dd.items" style="border-bottom:grey solid 1px;">
+        <td ng-repeat="(key, field) in item" ng-hide="['id', 'customer'].indexOf(key)!==-1">{{field}}</td>
+        <td ng-repeat="cust in dd.formFields.customers" ng-show="cust.id==item.customer">{{cust.name}}</td>
+        
+        <td><span style="padding-left:10px; position: absolute; right:50px; ">  
+          <input type="button" value="Edit" ng-click="dd.edit(item, $index)">
+          <input type="button" value="Del" ng-click="dd.deleteItem(item, $index)">
+        </span></td>
+      </tr>
+      
+    <!-- ============================================  --> 
+      
+      
+    </table>
+  </div>
+</div>
+<hr>
+

@@ -1,5 +1,6 @@
 {
     "name": "mhuxain/bzcomp",
+    "type": "asgard-module",
     "require": {
         "monolog/monolog": "1.0.*"
     }
